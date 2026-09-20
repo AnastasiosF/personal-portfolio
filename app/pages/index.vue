@@ -6,14 +6,14 @@ const { data: featured } = await useAsyncData('featured-projects', () =>
 )
 
 const { data: recent } = await useAsyncData('recent-experience', () =>
-  queryCollection('experience').order('start', 'DESC').limit(2).all(),
+  queryCollection('experience').order('start', 'DESC').limit(3).all(),
 )
 
 // Sequence: the hero prompt types, then its output boots in, then the lists print.
 const heroCommand = 'whoami'
 const heroDone = typedDuration(heroCommand)
 const projectsCommand = 'ls ~/projects --featured'
-const experienceCommand = 'tail -n 2 ~/experience.log'
+const experienceCommand = 'tail -n 3 ~/experience.log'
 
 useHead({ titleTemplate: null })
 useSeoMeta({
