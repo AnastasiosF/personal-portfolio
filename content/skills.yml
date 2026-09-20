@@ -1,14 +1,18 @@
-# [PLACEHOLDER] Edit freely. Each group renders as "name: item, item, item".
+# Each group renders as "name: item, item, item".
 groups:
   - name: languages
-    items: [Kotlin, Java, C#, TypeScript, Python]
-  - name: backend
-    items: [Spring Boot, .NET, REST APIs, JWT auth, Dapper]
-  - name: mobile
-    items: [Android (native), Jetpack]
+    items: [TypeScript, JavaScript, C#, SQL]
   - name: frontend
-    items: [Vue, Nuxt, Tailwind CSS]
+    items: [React, Vue.js, Nuxt, Ant Design, TanStack Query, Tailwind CSS]
+  - name: mobile
+    items: [React Native, Expo, Tamagui, Reanimated, Ionic, Electron]
+  - name: backend
+    items: [Node.js, Express, ASP.NET, .NET Core, REST APIs, OpenAPI, Socket.IO, Zod]
   - name: data
-    items: [PostgreSQL, SQL Server, SQLite]
-  - name: tooling
-    items: [Docker, Git, GitHub Actions, Linux]
+    items: [PostgreSQL, Supabase, SQLite, SQL Server, Firebase]
+  - name: platform
+    items: [Azure, DigitalOcean, Vercel, Docker, GitHub Actions, CI/CD]
+  - name: product
+    items: [SaaS architecture, Stripe billing, push notifications, monorepos, offline-first sync]
+  - name: practices
+    items: [System design, technical leadership, mentoring, hiring, Vitest, Jest]

@@ -9,6 +9,12 @@ const { data: recent } = await useAsyncData('recent-experience', () =>
   queryCollection('experience').order('start', 'DESC').limit(2).all(),
 )
 
+// Sequence: the hero prompt types, then its output boots in, then the lists print.
+const heroCommand = 'whoami'
+const heroDone = typedDuration(heroCommand)
+const projectsCommand = 'ls ~/projects --featured'
+const experienceCommand = 'tail -n 2 ~/experience.log'
+
 useHead({ titleTemplate: null })
 useSeoMeta({
   title: `${site.name}, software engineer`,
@@ -20,38 +26,40 @@ useSeoMeta({
 
 <template>
   <div>
-    <section class="boot" aria-labelledby="whoami">
-      <TerminalPrompt id="whoami" tag="h1" command="whoami" :label="site.name" cursor />
-      <p class="mt-5 text-2xl font-medium md:text-3xl">{{ site.name }}</p>
-      <p class="mt-2 max-w-[60ch] text-muted">{{ site.tagline }}</p>
-      <div class="mt-6 max-w-[65ch] space-y-3">
-        <p>
-          [PLACEHOLDER] Two or three sentences about you. What you build, what you care about
-          when you build it, and the kind of problems you like being handed.
+    <section aria-labelledby="whoami">
+      <TerminalPrompt id="whoami" tag="h1" :command="heroCommand" :label="site.name" cursor />
+      <div class="boot" :style="{ '--boot-delay': `${heroDone}ms` }">
+        <p class="mt-5 text-2xl font-medium md:text-3xl">{{ site.name }}</p>
+        <p class="mt-2 max-w-[60ch] text-muted">{{ site.tagline }}</p>
+        <p class="mt-6 max-w-[65ch]">
+          I lead the InfoGate mobile and onboard products at DANAOS: ship-to-shore messaging used
+          by 150+ shipping companies, running as an Electron app at sea and React Native apps on
+          the phone. I own them from architecture to production support.
         </p>
-        <p>
-          [PLACEHOLDER] Where you are based, what you are doing now, and whether you are open to
-          new work.
+        <p class="mt-3 max-w-[65ch]">
+          On the side I build <NuxtLink to="/projects/myfitzone" class="link">myFitZone</NuxtLink>,
+          a booking and business platform for independent trainers. Based in Greece, working
+          remotely.
         </p>
+        <ContactLinks class="mt-8" />
       </div>
-      <ContactLinks class="mt-8" />
     </section>
 
     <section class="mt-16" aria-labelledby="featured">
-      <TerminalPrompt id="featured" command="ls ~/projects --featured" label="Featured projects" />
-      <ul class="mt-4 border-b border-border">
+      <TerminalPrompt id="featured" :command="projectsCommand" label="Featured projects" :delay="heroDone + 500" />
+      <PrintList class="mt-4 border-b border-border" :delay="typedDuration(projectsCommand, heroDone + 500)">
         <ProjectRow v-for="project in featured" :key="project.path" :project="project" />
-      </ul>
+      </PrintList>
       <p class="mt-4">
         <NuxtLink to="/projects" class="link">all projects</NuxtLink>
       </p>
     </section>
 
     <section class="mt-16" aria-labelledby="recent">
-      <TerminalPrompt id="recent" command="tail -n 2 ~/experience.log" label="Recent experience" />
-      <ul class="mt-4 border-b border-border">
+      <TerminalPrompt id="recent" :command="experienceCommand" label="Recent experience" :delay="heroDone + 900" />
+      <PrintList class="mt-4 border-b border-border" :delay="typedDuration(experienceCommand, heroDone + 900)">
         <ExperienceItem v-for="item in recent" :key="item.id" :item="item" />
-      </ul>
+      </PrintList>
       <p class="mt-4">
         <NuxtLink to="/resume" class="link">full resume</NuxtLink>
       </p>

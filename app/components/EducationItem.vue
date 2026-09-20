@@ -12,7 +12,7 @@ defineProps<{ item: EducationCollectionItem }>()
         {{ item.degree }}<template v-if="item.field">, {{ item.field }}</template>
       </h3>
       <p class="text-muted">{{ item.institution }}</p>
-      <ul v-if="item.notes.length" class="mt-2 space-y-1 pl-[2ch] marker:text-muted" style="list-style: '- '">
+      <ul v-if="item.notes.length" class="dash-list mt-2 space-y-1">
         <li v-for="line in item.notes" :key="line" class="max-w-[70ch]">{{ line }}</li>
       </ul>
     </div>

@@ -17,7 +17,7 @@ defineProps<{ item: ExperienceCollectionItem }>()
         <a v-if="item.url" :href="item.url" class="link" rel="noopener" target="_blank">{{ item.company }}</a>
         <template v-else>{{ item.company }}</template>
       </h3>
-      <ul class="mt-2 space-y-1 pl-[2ch] text-fg marker:text-muted" style="list-style: '- '">
+      <ul class="dash-list mt-2 space-y-1 text-fg">
         <li v-for="line in item.highlights" :key="line" class="max-w-[70ch]">{{ line }}</li>
       </ul>
       <p v-if="item.tech.length" class="mt-2 flex flex-wrap gap-x-3 text-sm">

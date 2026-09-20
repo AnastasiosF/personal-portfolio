@@ -23,8 +23,8 @@ pnpm typecheck  # vue-tsc via nuxt typecheck
 
 | What | Where | Notes |
 | --- | --- | --- |
-| Name, tagline, email, GitHub, LinkedIn, CV path | `app/composables/useSiteConfig.ts` | Replace every `PLACEHOLDER` |
-| About paragraphs | `app/pages/index.vue` | Two `[PLACEHOLDER]` paragraphs |
+| Name, tagline, email, GitHub, LinkedIn, CV path | `app/composables/useSiteConfig.ts` | Email is still a `PLACEHOLDER` |
+| About paragraphs | `app/pages/index.vue` | Hero copy under the `whoami` prompt |
 | Projects | `content/projects/NN.slug.md` | Frontmatter + Markdown body. `NN.` prefix sets the order; the slug becomes `/projects/slug` |
 | Work history | `content/experience/NN.company.yml` | Sorted newest first by `start`. Omit `end` for a current role |
 | Education | `content/education/NN.school.yml` | |

@@ -9,10 +9,10 @@ export const useSiteConfig = () => {
     name: 'Anastasios Fortis',
     handle: 'afortis',
     host: 'portfolio',
-    tagline: 'Software engineer building backends, Android apps, and the tooling around them.',
+    tagline: 'Senior software engineer, 7+ years across web, mobile, and backend. Software that survives production, scales with demand, and adapts to real-world constraints.',
     email: 'PLACEHOLDER@example.com',
     github: 'https://github.com/AnastasiosF',
-    linkedin: 'https://www.linkedin.com/in/PLACEHOLDER',
+    linkedin: 'https://www.linkedin.com/in/anastasios-fortis-18b453138/',
     siteUrl: siteUrl.replace(/\/$/, ''),
     cvPath: '/cv/anastasios-fortis-cv.pdf',
   } as const

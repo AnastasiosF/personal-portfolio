@@ -19,10 +19,14 @@ export default defineNuxtConfig({
   },
 
   app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       htmlAttrs: { lang: 'en' },
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
       meta: [{ name: 'theme-color', content: '#12161c' }],
+      // Marks JS as available before first paint so scroll-triggered motion
+      // can start hidden without hiding content for no-JS visitors.
+      script: [{ innerHTML: 'document.documentElement.classList.add("js")', tagPosition: 'head' }],
     },
   },
 

@@ -1,0 +1,11 @@
+company: DANAOS Management Consultants
+role: Lead Software Engineer, InfoGate Mobile & Onboard
+location: Remote
+start: "2023-01"
+url: https://www.danaos.com
+highlights:
+  - Sole engineer and end-to-end owner of the InfoGate mobile and onboard product line, the maritime communication platform 150+ shipping companies use for ship-to-shore messaging and paperless office workflows.
+  - InfoGate Onboard, an Electron desktop app for vessel workstations with a sync layer built for low-bandwidth satellite links.
+  - InfoGate OnTheGo and 360, React Native iOS and Android apps rebuilt from the ground up after migrating off a legacy Cordova codebase.
+  - Own architecture, development, CI/CD, and production support across all three products.
+tech: [typescript, react, react-native, electron, node]

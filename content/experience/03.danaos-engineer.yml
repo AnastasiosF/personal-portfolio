@@ -1,0 +1,12 @@
+company: DANAOS Management Consultants
+role: Software Engineer
+location: Remote
+start: "2018-10"
+end: "2020-10"
+url: https://www.danaos.com
+highlights:
+  - Built cross-platform mobile applications with the Ionic Framework as part of a collaborative engineering team.
+  - Designed and implemented backend APIs in .NET supporting mobile and web applications.
+  - Worked with senior engineers to define API structures and data flows aligned with business requirements.
+  - Delivered features for enterprise systems used by maritime clients, gaining production-scale and distributed-deployment experience.
+tech: [ionic, dotnet, sqlite, react]

@@ -1,0 +1,14 @@
+company: DANAOS Management Consultants
+role: Senior Software Engineer
+location: Remote
+start: "2020-10"
+url: https://www.danaos.com
+highlights:
+  - Led the modernisation of a legacy system, migrating from Ionic and .NET Framework to React Native, .NET Core, and Node.js.
+  - Drove architecture and technology strategy, selecting stacks and redesigning components for long-term maintainability.
+  - Eliminated major latency issues across mobile and backend systems, delivering a noticeably faster product.
+  - Co-designed and implemented APIs serving 10K+ users across 120+ enterprise clients, deployed on Azure and on-premise.
+  - Designed custom API flows for complex business requirements, enabling integrations across diverse enterprise infrastructures.
+  - Technical lead for mobile development, mentoring engineers and acting as the point of guidance for architecture and best practices.
+  - Took part in hiring and the technical evaluation of candidates.
+tech: [asp-net, dotnet-core, node, react-native, azure]

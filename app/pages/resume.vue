@@ -11,6 +11,9 @@ const { data: skills } = await useAsyncData('skills', () =>
   queryCollection('skills').first(),
 )
 
+const command = 'cat ~/resume.md'
+const done = typedDuration(command)
+
 useSeoMeta({
   title: 'resume',
   description: `Work history, education, and skills of ${site.name}.`,
@@ -21,31 +24,33 @@ useSeoMeta({
 
 <template>
   <div>
-    <TerminalPrompt tag="h1" command="cat ~/resume.md" label="Resume" />
-    <p class="mt-3">
-      <a :href="site.cvPath" class="link inline-flex items-center gap-1.5" download>
-        <Icon name="lucide:download" class="size-4" aria-hidden="true" />
-        download as pdf
-      </a>
-    </p>
+    <TerminalPrompt tag="h1" :command="command" label="Resume" />
+    <div class="boot" :style="{ '--boot-delay': `${done}ms` }">
+      <p class="mt-3">
+        <a :href="site.cvPath" class="link inline-flex items-center gap-1.5" download>
+          <Icon name="lucide:download" class="size-4" aria-hidden="true" />
+          download as pdf
+        </a>
+      </p>
 
-    <section class="mt-12" aria-labelledby="experience">
-      <h2 id="experience" class="heading-md">experience</h2>
-      <ul class="mt-4 border-b border-border">
-        <ExperienceItem v-for="item in experience" :key="item.id" :item="item" />
-      </ul>
-    </section>
+      <section class="mt-12" aria-labelledby="experience">
+        <h2 id="experience" class="heading-md">experience</h2>
+        <PrintList class="mt-4 border-b border-border">
+          <ExperienceItem v-for="item in experience" :key="item.id" :item="item" />
+        </PrintList>
+      </section>
 
-    <section class="mt-12" aria-labelledby="education">
-      <h2 id="education" class="heading-md">education</h2>
-      <ul class="mt-4 border-b border-border">
-        <EducationItem v-for="item in education" :key="item.id" :item="item" />
-      </ul>
-    </section>
+      <section class="mt-12" aria-labelledby="education">
+        <h2 id="education" class="heading-md">education</h2>
+        <PrintList class="mt-4 border-b border-border">
+          <EducationItem v-for="item in education" :key="item.id" :item="item" />
+        </PrintList>
+      </section>
 
-    <section v-if="skills" class="mt-12" aria-labelledby="skills">
-      <h2 id="skills" class="heading-md">skills</h2>
-      <SkillsGrid class="mt-4 border-b border-border" :groups="skills.groups" />
-    </section>
+      <section v-if="skills" class="mt-12" aria-labelledby="skills">
+        <h2 id="skills" class="heading-md">skills</h2>
+        <SkillsGrid class="mt-4 border-b border-border" :groups="skills.groups" />
+      </section>
+    </div>
   </div>
 </template>

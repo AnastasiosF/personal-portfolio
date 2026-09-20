@@ -62,6 +62,44 @@
   }
 }
 
+/* Header navigation: the accent underline draws in from the left on hover. */
+@utility nav-link {
+  position: relative;
+  transition: color 120ms ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 160ms ease;
+  }
+
+  &:hover {
+    color: var(--color-accent);
+  }
+
+  &:hover::after,
+  &[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Bullet list with a plain "- " marker, as Markdown would render in a terminal. */
+@utility dash-list {
+  list-style: "- ";
+  padding-left: 2ch;
+
+  & > li::marker {
+    color: var(--color-muted);
+  }
+}
+
 /* Markdown-style section heading: "## experience". */
 @utility heading-md {
   font-weight: 500;
@@ -73,6 +111,11 @@
     color: var(--color-muted);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Motion. Everything here is CSS-only, sequenced with custom properties, and
+   switched off entirely under prefers-reduced-motion.
+   --------------------------------------------------------------------------- */
 
 /* Blinking block cursor. Decorative only; always aria-hidden in markup. */
 .cursor {
@@ -91,15 +134,55 @@
   }
 }
 
-/* The single orchestrated moment: hero lines appear in sequence on first load. */
-.boot > * {
-  animation: boot-in 420ms ease-out both;
+/* Typewriter for prompt headings. Width grows in whole-character steps, so
+   the block cursor after it rides along. Only on wider screens: a wrapped
+   command cannot be typed on one line. */
+@media (prefers-reduced-motion: no-preference) and (min-width: 640px) {
+  .prompt-cmd.is-typed {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+    width: 0;
+    animation: typing var(--type-ms) steps(var(--chars), end) var(--type-delay) forwards;
+  }
+  .prompt-cmd.is-typed + .cursor {
+    /* solid while typing, blinks once the command is complete */
+    animation-delay: calc(var(--type-delay) + var(--type-ms));
+  }
 }
-.boot > :nth-child(2) { animation-delay: 90ms; }
-.boot > :nth-child(3) { animation-delay: 180ms; }
-.boot > :nth-child(4) { animation-delay: 270ms; }
-.boot > :nth-child(5) { animation-delay: 360ms; }
-.boot > :nth-child(n + 6) { animation-delay: 450ms; }
+
+@keyframes typing {
+  to {
+    width: calc(var(--chars) * 1ch + 0.15ch);
+  }
+}
+
+/* Output lines that appear after a prompt has finished typing.
+   Set --boot-delay on the container (see typedDuration in utils/motion.ts). */
+.boot {
+  --boot-total: var(--boot-delay, 0ms);
+}
+@media (max-width: 639px) {
+  .boot {
+    --boot-total: 120ms;
+  }
+}
+.boot > :nth-child(1) { --i: 0; }
+.boot > :nth-child(2) { --i: 1; }
+.boot > :nth-child(3) { --i: 2; }
+.boot > :nth-child(4) { --i: 3; }
+.boot > :nth-child(5) { --i: 4; }
+.boot > :nth-child(6) { --i: 5; }
+.boot > :nth-child(7) { --i: 6; }
+.boot > :nth-child(n + 8) { --i: 7; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .boot > * {
+    animation: boot-in 320ms ease-out both;
+    animation-delay: calc(var(--boot-total) + var(--i) * 90ms);
+  }
+}
 
 @keyframes boot-in {
   from {
@@ -108,10 +191,54 @@
   }
 }
 
+/* Lists that print row by row the first time they scroll into view.
+   The .js class (set before first paint) keeps rows visible without JS. */
+.print > :nth-child(1) { --i: 0; }
+.print > :nth-child(2) { --i: 1; }
+.print > :nth-child(3) { --i: 2; }
+.print > :nth-child(4) { --i: 3; }
+.print > :nth-child(5) { --i: 4; }
+.print > :nth-child(6) { --i: 5; }
+.print > :nth-child(7) { --i: 6; }
+.print > :nth-child(8) { --i: 7; }
+.print > :nth-child(9) { --i: 8; }
+.print > :nth-child(n + 10) { --i: 9; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .print > * {
+    opacity: 0;
+  }
+  .js .print.is-printed > * {
+    animation: print-in 220ms steps(2, end) both;
+    animation-delay: calc(var(--print-delay, 0ms) + var(--i) * 80ms);
+  }
+}
+
+@keyframes print-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Route change: quick clear-and-redraw. */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 140ms ease;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cursor,
-  .boot > * {
+  .boot > *,
+  .print > * {
     animation: none;
+  }
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
   }
 }
 

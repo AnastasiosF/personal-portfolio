@@ -18,6 +18,9 @@ const slug = computed(() => route.path.split('/').pop() ?? '')
 const prev = computed(() => surround.value?.[0] ?? null)
 const next = computed(() => surround.value?.[1] ?? null)
 
+const command = computed(() => `cat ${slug.value}.md`)
+const done = computed(() => typedDuration(command.value))
+
 useSeoMeta({
   title: project.value.title,
   description: project.value.description,
@@ -30,11 +33,14 @@ useSeoMeta({
 
 <template>
   <article v-if="project">
-    <TerminalPrompt tag="h1" path="~/projects" :command="`cat ${slug}.md`" :label="project.title" />
+    <TerminalPrompt tag="h1" path="~/projects" :command="command" :label="project.title" />
 
-    <header class="mt-6">
-      <p class="text-2xl font-medium md:text-3xl">{{ project.title }}</p>
-      <p class="mt-2 max-w-[65ch] text-muted">{{ project.description }}</p>
+    <div class="boot" :style="{ '--boot-delay': `${done}ms` }">
+      <header class="mt-6">
+        <p class="text-2xl font-medium md:text-3xl">{{ project.title }}</p>
+        <p class="mt-2 max-w-[65ch] text-muted">{{ project.description }}</p>
+      </header>
+
       <dl class="mt-5 grid gap-x-6 gap-y-1 text-sm md:grid-cols-[7rem_1fr]">
         <dt class="text-muted">date</dt>
         <dd><time :datetime="project.date">{{ formatYearMonth(project.date) }}</time></dd>
@@ -52,14 +58,14 @@ useSeoMeta({
           </dd>
         </template>
       </dl>
-    </header>
 
-    <ContentRenderer :value="project" class="prose-terminal mt-10" />
+      <ContentRenderer :value="project" class="prose-terminal mt-10" />
 
-    <nav class="mt-16 flex flex-wrap justify-between gap-4 border-t border-border pt-6 text-sm" aria-label="Other projects">
-      <NuxtLink v-if="prev" :to="prev.path" class="link">&lt; {{ prev.title }}</NuxtLink>
-      <span v-else />
-      <NuxtLink v-if="next" :to="next.path" class="link">{{ next.title }} &gt;</NuxtLink>
-    </nav>
+      <nav class="mt-16 flex flex-wrap justify-between gap-4 border-t border-border pt-6 text-sm" aria-label="Other projects">
+        <NuxtLink v-if="prev" :to="prev.path" class="link">&lt; {{ prev.title }}</NuxtLink>
+        <span v-else />
+        <NuxtLink v-if="next" :to="next.path" class="link">{{ next.title }} &gt;</NuxtLink>
+      </nav>
+    </div>
   </article>
 </template>
