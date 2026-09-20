@@ -1,0 +1,14 @@
+# [PLACEHOLDER] Edit freely. Each group renders as "name: item, item, item".
+groups:
+  - name: languages
+    items: [Kotlin, Java, C#, TypeScript, Python]
+  - name: backend
+    items: [Spring Boot, .NET, REST APIs, JWT auth, Dapper]
+  - name: mobile
+    items: [Android (native), Jetpack]
+  - name: frontend
+    items: [Vue, Nuxt, Tailwind CSS]
+  - name: data
+    items: [PostgreSQL, SQL Server, SQLite]
+  - name: tooling
+    items: [Docker, Git, GitHub Actions, Linux]

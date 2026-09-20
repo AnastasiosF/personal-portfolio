@@ -1,0 +1,12 @@
+# [PLACEHOLDER] Replace with a real role. Files are ordered by `start` (newest first) on the page.
+company: "[PLACEHOLDER] Company A"
+role: Software Engineer
+location: Athens, Greece
+start: "2023-01"
+# Omit `end` for a current role; it renders as "present".
+url: https://example.com
+highlights:
+  - "[PLACEHOLDER] One line about the thing you owned and the result it produced."
+  - "[PLACEHOLDER] One line about a technical decision you drove and why."
+  - "[PLACEHOLDER] One line about a measurable outcome: latency, cost, adoption, reliability."
+tech: [kotlin, spring-boot, postgresql, docker]
