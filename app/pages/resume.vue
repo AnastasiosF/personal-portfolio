@@ -26,14 +26,7 @@ useSeoMeta({
   <div>
     <TerminalPrompt tag="h1" :command="command" label="Resume" />
     <div class="boot" :style="{ '--boot-delay': `${done}ms` }">
-      <p class="mt-3">
-        <a :href="site.cvPath" class="link inline-flex items-center gap-1.5" download>
-          <Icon name="lucide:download" class="size-4" aria-hidden="true" />
-          download as pdf
-        </a>
-      </p>
-
-      <section class="mt-12" aria-labelledby="experience">
+      <section class="mt-8" aria-labelledby="experience">
         <h2 id="experience" class="heading-md">experience</h2>
         <PrintList class="mt-4 border-b border-border">
           <ExperienceItem v-for="item in experience" :key="item.id" :item="item" />

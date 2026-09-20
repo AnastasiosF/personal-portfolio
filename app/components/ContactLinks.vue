@@ -1,7 +1,5 @@
 <script setup lang="ts">
 const site = useSiteConfig()
-
-withDefaults(defineProps<{ cv?: boolean }>(), { cv: false })
 </script>
 
 <template>
@@ -22,12 +20,6 @@ withDefaults(defineProps<{ cv?: boolean }>(), { cv: false })
       <a :href="site.linkedin" class="link inline-flex items-center gap-1.5" rel="me noopener" target="_blank">
         <Icon name="simple-icons:linkedin" class="size-4" aria-hidden="true" />
         linkedin
-      </a>
-    </li>
-    <li v-if="cv">
-      <a :href="site.cvPath" class="link inline-flex items-center gap-1.5" download>
-        <Icon name="lucide:download" class="size-4" aria-hidden="true" />
-        cv.pdf
       </a>
     </li>
   </ul>

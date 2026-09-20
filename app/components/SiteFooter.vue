@@ -6,7 +6,7 @@ const year = new Date().getFullYear()
 <template>
   <footer class="border-t border-border">
     <div class="mx-auto w-full max-w-3xl space-y-4 px-5 py-8 text-sm">
-      <ContactLinks cv />
+      <ContactLinks />
       <p class="text-muted">
         &copy; {{ year }} {{ site.name }}. Built with Nuxt, hosted on Vercel.
       </p>
